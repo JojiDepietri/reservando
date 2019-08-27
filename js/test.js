@@ -64,19 +64,49 @@ describe('Restaurant', () => {
 
 describe('Listado', () => {
     describe('buscarRestaurante(id)', () => {
-        it('Se debe mostrar el restaurant buscado si existe el número de id.', () => {
-            const restaurantBuscado = listado.buscarRestaurante(1);
-            expect(restaurantBuscado).to.equal(listado[0]);
+        it('Se debe regresar el restaurant buscado si existe el número de id.', () => {
+           const restaurantBuscado = listado.buscarRestaurante(1);
+           const restaurantIdUno = listado.restaurantes[0];
+           expect(restaurantBuscado).to.equal(restaurantIdUno);
 
         })
-    
+
         it('Se debe mostrar un alerta si no existe el número de id del restaurant buscado.', () => {
-            
+            const restaurantBuscado = listado.buscarRestaurante(30);
+            expect(restaurantBuscado).to.equal('No se ha encontrado ningún restaurant');
+        })
+
+        it('Se debe mostrar un alerta si no se ingresa un id como parámetro.', () => {
+            const restaurantBuscado = listado.buscarRestaurante(0);
+            expect(restaurantBuscado).to.equal('No se ha encontrado ningún restaurant');
         })
     })
 
     describe('obtenerRestaurantes()', () => {
+        it('Si se filtra por Rubro se deberá crear un nuevo Array solo con los restaurants de ese Rubro', () => {
     
+        })
+
+        it('Si se filtra por Ciudad se deberá crear un nuevo Array solo con los restaurants de esa Ciudad', () => {
+
+        })
+
+        it('Si se filtra por Horario se deberá crear un nuevo Array solo con los restaurants que se pueden reservar en ese horario', () => {
+
+        })
+
+        it('Si se filtra por Rubro, Ciudad y Horario se deberá crear un nuevo Array solo con los restaurants que cumplan con los 3 requisitos', () => {
+
+        })
+
+        it('Si no se ingresa ningún filtro como parámetro no se genera un nuevo array filtrado', () => {
+
+        })
+
+        it('Si se ingresan parámetros que no coinciden con las propiedades Rubro, Ciudad u Horario no se genera un nuevo array filtrado', () => {
+
+        })
+
     })
 
 })
