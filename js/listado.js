@@ -41,7 +41,6 @@ function filtrarArray (filtro) {
     });
 }
 
-
 //Obtiene todas las ciudades de los restaurantes sin repetidos
 Listado.prototype.obtenerUbicaciones = function() {
     //Array donde se van a ir agregando las ciudades (van a estar repetidas)

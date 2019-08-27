@@ -84,27 +84,39 @@ describe('Listado', () => {
 
     describe('obtenerRestaurantes()', () => {
         it('Si se filtra por Rubro se deberá crear un nuevo Array solo con los restaurants de ese Rubro', () => {
-    
+            const nuevoListado = new Listado(listadoDeRestaurantes);
+            const restaurentesPorRubro = nuevoListado.obtenerRestaurantes('Pizza', null, null);
+            expect(restaurentesPorRubro.length).to.equal(4);
         })
 
         it('Si se filtra por Ciudad se deberá crear un nuevo Array solo con los restaurants de esa Ciudad', () => {
-
+            const nuevoListado = new Listado(listadoDeRestaurantes);
+            const restaurentesPorRubro = nuevoListado.obtenerRestaurantes(null,'París', null);
+            expect(restaurentesPorRubro.length).to.equal(6);
         })
 
         it('Si se filtra por Horario se deberá crear un nuevo Array solo con los restaurants que se pueden reservar en ese horario', () => {
-
+            const nuevoListado = new Listado(listadoDeRestaurantes);
+            const restaurentesPorRubro = nuevoListado.obtenerRestaurantes(null, null, '20:30');
+            expect(restaurentesPorRubro.length).to.equal(1);
         })
 
         it('Si se filtra por Rubro, Ciudad y Horario se deberá crear un nuevo Array solo con los restaurants que cumplan con los 3 requisitos', () => {
-
+            const nuevoListado = new Listado(listadoDeRestaurantes);
+            const restaurentesPorRubro = nuevoListado.obtenerRestaurantes('Pizza', 'París', '12:00');
+            expect(restaurentesPorRubro.length).to.equal(1);
         })
 
         it('Si no se ingresa ningún filtro como parámetro no se genera un nuevo array filtrado', () => {
-
+            const nuevoListado = new Listado(listadoDeRestaurantes);
+            const restaurentesPorRubro = nuevoListado.obtenerRestaurantes( null, null, null);
+            expect(restaurentesPorRubro).to.eql(nuevoListado.restaurantes);
         })
 
         it('Si se ingresan parámetros que no coinciden con las propiedades Rubro, Ciudad u Horario no se genera un nuevo array filtrado', () => {
-
+            const nuevoListado = new Listado(listadoDeRestaurantes);
+            const restaurentesPorRubro = nuevoListado.obtenerRestaurantes( 'Tacos', 'La Lupita', '04:00');
+            expect(restaurentesPorRubro.length).to.equal(0);
         })
 
     })
