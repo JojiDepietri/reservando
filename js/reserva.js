@@ -51,18 +51,10 @@ Reserva.prototype.calcularDescuentos = function() {
     return dtoPorGrupo + dtoPorCodigo;
 }
 
-// var nuevaReserva = new Reserva(5, 5, 300, 'DES15');
-// nuevaReserva.calcularDescuentos();
-// var nuevaReserva2 = new Reserva(5, 7, 300, 'DES200');
-// nuevaReserva2.calcularDescuentos();
-// var nuevaReserva3 = new Reserva(5, 9, 300, 'DES1');
-// nuevaReserva3.calcularDescuentos();
-
-
 Reserva.prototype.calcularPrecioTotal = function() {
-    const precioBase = this.calcularPrecioBase();
-    const adicionales = this.calcularAdicionales();
-    const descuentos = this.calcularDescuentos();
+    var precioBase = this.calcularPrecioBase();
+    var adicionales = this.calcularAdicionales();
+    var descuentos = this.calcularDescuentos();
 
     return precioBase + adicionales - descuentos;
 }

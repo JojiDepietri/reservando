@@ -18,7 +18,7 @@ Listado.prototype.calificarRestaurant = function(id, calificacion) {
 
 //Dado un id, busca el objeto del listado que tiene ese id
 Listado.prototype.buscarRestaurante = function(id) {
-    const resultado = this.restaurantes.find(resto => {return resto.id === id});
+    var resultado = this.restaurantes.find(resto => {return resto.id === id});
     if (resultado !== undefined) {
         return resultado;
     } else {
