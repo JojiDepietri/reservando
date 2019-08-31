@@ -131,3 +131,21 @@ describe('Listado', () => {
     })
 
 })
+
+describe('Reserva', () => {
+    describe('calcularPrecioBase()', () => {
+        it('La funcion debe calcular correctamente el precio base de la reserva', () => {
+            const nuevaReserva = new Reserva(new Date(2018, 7, 24, 11, 00), 8, 350, "DES1");
+            const testPrecioBase = nuevaReserva.calcularPrecioBase();
+            expect(testPrecioBase).to.equal(2800);
+        })
+    })
+
+    describe('calcularPrecioFinal()', () => {
+        it('La funcion debe calcular correctamente el precio total de la reserva', () => {
+            const nuevaReserva = new Reserva(new Date(2018, 7, 27, 14, 100), 2, 150, "DES200");
+            const testPrecioTotal = nuevaReserva.calcularPrecioTotal();
+            expect(testPrecioTotal).to.equal(100);
+        })
+    })
+})
