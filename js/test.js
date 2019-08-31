@@ -74,58 +74,101 @@ describe('Restaurant', () => {
 describe('Listado', () => {
     describe('buscarRestaurante(id)', () => {
         it('Si existe el número de id del restaurant buscado, se debe regresar el restaurant buscado.', () => {
-            var restaurantBuscado = listado.buscarRestaurante(1);
-           var restaurantIdUno = listado.restaurantes[0];
-           expect(restaurantBuscado).to.equal(restaurantIdUno);
-
+           var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlín", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+           ];
+           var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+           expect(nuevoListado.buscarRestaurante(1)).to.equal(nuevaListaDeRestaurantes[0]);
         })
 
         it('Si no existe el número de id del restaurant buscado, se debe mostrar un alerta ', () => {
-            var restaurantBuscado = listado.buscarRestaurante(30);
-            expect(restaurantBuscado).to.equal('No se ha encontrado ningún restaurant');
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlín", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            expect(nuevoListado.buscarRestaurante(5)).to.equal('No se ha encontrado ningún restaurant');
         })
 
         it('Si no se ingresa un id como parámetro, se debe mostrar un alerta.', () => {
-            var restaurantBuscado = listado.buscarRestaurante(0);
-            expect(restaurantBuscado).to.equal('No se ha encontrado ningún restaurant');
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlín", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            expect(nuevoListado.buscarRestaurante()).to.equal('No se ha encontrado ningún restaurant');
         })
     })
 
     describe('obtenerRestaurantes()', () => {
         it('Si se filtra por Rubro, se debe crear un nuevo Array solo con los restaurants de ese Rubro', () => {
-            var nuevoListado = new Listado(listadoDeRestaurantes);
-            var restaurentesPorRubro = nuevoListado.obtenerRestaurantes('Pizza', null, null);
-            expect(restaurentesPorRubro.length).to.equal(4);
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlín", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            var restaurentesPorRubro = nuevoListado.obtenerRestaurantes('Asiática', null, null);
+            expect(restaurentesPorRubro.length).to.equal(2);
         })
 
         it('Si se filtra por Ciudad, se debe crear un nuevo Array solo con los restaurants de esa Ciudad', () => {
-            var nuevoListado = new Listado(listadoDeRestaurantes);
-            var restaurentesPorRubro = nuevoListado.obtenerRestaurantes(null,'París', null);
-            expect(restaurentesPorRubro.length).to.equal(6);
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Nueva York", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Nueva York", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            var restaurentesPorCiudad = nuevoListado.obtenerRestaurantes(null, 'Nueva York', null);
+            expect(restaurentesPorCiudad.length).to.equal(3);
         })
 
         it('Si se filtra por Horario, se debe crear un nuevo Array solo con los restaurants que se pueden reservar en ese horario', () => {
-            var nuevoListado = new Listado(listadoDeRestaurantes);
-            var restaurentesPorRubro = nuevoListado.obtenerRestaurantes(null, null, '20:30');
-            expect(restaurentesPorRubro.length).to.equal(1);
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlin", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            var restaurentesPorHorario = nuevoListado.obtenerRestaurantes(null, null, '13:00');
+            expect(restaurentesPorHorario.length).to.equal(1);
         })
 
         it('Si se filtra por Rubro, Ciudad y Horario, se debe crear un nuevo Array solo con los restaurants que cumplan con los 3 requisitos', () => {
-            var nuevoListado = new Listado(listadoDeRestaurantes);
-            var restaurentesPorRubro = nuevoListado.obtenerRestaurantes('Pizza', 'París', '12:00');
-            expect(restaurentesPorRubro.length).to.equal(1);
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlin", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            var restaurentesFiltrado = nuevoListado.obtenerRestaurantes('Hamburguesa', 'Berlin', '12:00');
+            expect(restaurentesFiltrado.length).to.equal(1);
         })
 
         it('Si no se ingresa ningún filtro como parámetro, no se genera un nuevo array filtrado, sino que será igual al array restaurantes', () => {
-            var nuevoListado = new Listado(listadoDeRestaurantes);
-            var restaurentesPorRubro = nuevoListado.obtenerRestaurantes( null, null, null);
-            expect(restaurentesPorRubro).to.eql(nuevoListado.restaurantes);
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlin", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            var restaurentesFiltrado = nuevoListado.obtenerRestaurantes(null, null, null);
+            expect(restaurentesFiltrado).to.eql(nuevoListado.restaurantes);
         })
 
         it('Si se ingresan parámetros que no coinciden con las propiedades Rubro, Ciudad u Horario, el array filtrado quedará vacío', () => {
-            var nuevoListado = new Listado(listadoDeRestaurantes);
-            var restaurentesPorRubro = nuevoListado.obtenerRestaurantes( 'Tacos', 'La Lupita', '04:00');
-            expect(restaurentesPorRubro.length).to.equal(0);
+            var nuevaListaDeRestaurantes = [
+                new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5]),
+                new Restaurant(2, "Mandarín Kitchen", "Asiática", "Londres", ["15:00", "14:30", "12:30"], "../img/asiatica2.jpg", [7, 7, 3, 9, 7]),
+                new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlin", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9])
+            ];
+            var nuevoListado = new Listado(nuevaListaDeRestaurantes);
+            var restaurentesFiltrado = nuevoListado.obtenerRestaurantes('Tacos', 'La Lupita', '04:00');
+            expect(restaurentesFiltrado.length).to.equal(0);
         })
 
     })
